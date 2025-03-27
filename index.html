@@ -221,6 +221,99 @@
           background: #f4f4f8;
           padding: 2% 30px;
           margin-top: 4%;
+          .categories-tabs {
+            width: fit-content;
+            margin-left: auto;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+            padding: 8px 16px;
+            border-radius: 18px 0px 18px 0px;
+
+            background: #d12426;
+            .tab {
+              padding: 4px 10px;
+              outline: none;
+              border-radius: 4px;
+              cursor: pointer;
+              border: 1px solid transparent;
+              background: transparent;
+              color: #fff;
+              font-weight: 500;
+              font-family: "Poppins", sans-serif;
+              font-size: 16px;
+
+              &:hover {
+                border: 1px solid #c6c6c6;
+              }
+            }
+
+            .tab.active {
+              font-family: "Poppins", sans-serif;
+              border: 1px solid #d1d5dc;
+              background: #fff;
+              color: #000;
+            }
+          }
+          .view-category-container {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            .category {
+              background: #fff;
+              border: 1px solid rgba(0, 0, 0, 0.125);
+              padding: 20px 15px;
+              transition: all 300ms ease-in;
+              cursor: pointer;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              align-items: center;
+
+              div {
+                text-align: center;
+              }
+
+              &:hover {
+                box-shadow: 3px 3px 10px #a3a4a6;
+              }
+
+              .category-icon {
+                font-size: 30px;
+                color: #333;
+              }
+              .category-name {
+                margin-top: 10px;
+                background: linear-gradient(317deg, #d12426 3%, #fd7e14 89%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 24px;
+                font-family: "Raleway", sans-serif;
+                font-weight: 800;
+                text-transform: uppercase;
+              }
+              .view-range-btn {
+                margin-top: 10px;
+                font-family: "Jost", sans-serif;
+                border: 1px solid #000;
+                border-radius: 50px;
+                padding: 5px 15px;
+                background: transparent;
+                transition: all 300ms ease-in;
+                text-transform: uppercase;
+                cursor: pointer;
+                letter-spacing: 1px;
+                font-size: 10px;
+
+                &:hover {
+                  background-color: #d12426;
+                  border-color: #d12426;
+                  color: #fff;
+                }
+              }
+            }
+          }
+          .view-all-container {
+          }
         }
       }
 
@@ -413,6 +506,14 @@
             padding-top: 30px;
             gap: 15px;
           }
+          .categories {
+            .categories-tabs {
+              margin: 30px auto;
+            }
+            .view-category-container {
+              grid-template-columns: repeat(1, 1fr);
+            }
+          }
         }
 
         .footer {
@@ -518,7 +619,16 @@
           <h4 class="feature-title">Strong R&D</h4>
         </div>
       </div>
-      <div class="categories">Categories</div>
+      <section class="categories">
+        <div class="categories-tabs">
+          <button id="category-view" class="tab active">Category View</button>
+          <button id="view-all" class="tab">View All</button>
+        </div>
+        <div id="view-category-container" class="view-category-container"></div>
+        <div id="view-all-container" class="view-all-container">
+          View All categories
+        </div>
+      </section>
     </section>
     <footer class="footer">
       <div class="footer-container">
@@ -826,17 +936,15 @@
         let images = slider.children;
         let index = 0;
 
-        // Create dots
         for (let i = 0; i < images.length; i++) {
           let dot = document.createElement("span");
           dot.classList.add("dot");
-          if (i === 0) dot.classList.add("active"); // First dot active by default
+          if (i === 0) dot.classList.add("active");
           dot.addEventListener("click", () => goToSlide(i));
           dotsContainer.appendChild(dot);
         }
 
         let dots = document.querySelectorAll(".dot");
-
         function updateDots() {
           dots.forEach((dot, i) => {
             dot.classList.toggle("active", i === index);
@@ -845,7 +953,7 @@
 
         function goToSlide(slideIndex) {
           index = slideIndex;
-          slider.style.transform = `translateX(${-index * 350}px)`; // Adjust for image width
+          slider.style.transform = `translateX(${-index * 350}px)`;
           updateDots();
         }
 
@@ -856,6 +964,69 @@
         }
 
         setInterval(slideImages, 3000);
+
+        // Tab Section for Categories
+
+        const categoryTab = document.getElementById("category-view");
+        const viewAllTab = document.getElementById("view-all");
+        const categoryContainer = document.getElementById(
+          "view-category-container"
+        );
+        const viewAllContainer = document.getElementById("view-all-container");
+
+        function switchTab(selectedTab) {
+          if (selectedTab === "category") {
+            categoryContainer.style.display = "grid";
+            viewAllContainer.style.display = "none";
+            categoryTab.classList.add("active");
+            viewAllTab.classList.remove("active");
+          } else {
+            categoryContainer.style.display = "none";
+            viewAllContainer.style.display = "block";
+            viewAllTab.classList.add("active");
+            categoryTab.classList.remove("active");
+          }
+        }
+
+        categoryTab.addEventListener("click", () => switchTab("category"));
+        viewAllTab.addEventListener("click", () => switchTab("view-all"));
+
+        switchTab("category");
+
+        // Mapping Category Cards
+
+        const categories = [
+          { name: "Oncology", icon: "fas fa-ribbon" },
+          { name: "Hormones", icon: "fas fa-dna" },
+          { name: "Critical Care", icon: "fas fa-heartbeat" },
+          { name: "Cardiovascular", icon: "fas fa-heart" },
+          { name: "Anti-Biotic", icon: "fas fa-pills" },
+          { name: "Anti-Infective", icon: "fas fa-shield-virus" },
+          { name: "Anti-Retro Virals", icon: "fas fa-virus-slash" },
+          { name: "Anti-Fungal", icon: "fas fa-bacterium" },
+          { name: "Anti-Venom", icon: "fas fa-syringe" },
+          { name: "Dental Cartridges", icon: "fas fa-tooth" },
+          { name: "Disinfectants", icon: "fas fa-pump-soap" },
+          { name: "Gastrointestinal", icon: "fas fa-user" },
+          { name: "Mosquito Repellent", icon: "fas fa-bug" },
+          { name: "Topical Anti-Septic Solution", icon: "fas fa-pump-soap" },
+          { name: "Peptides", icon: "fas fa-vial" },
+          { name: "Suppositories", icon: "fas fa-capsules" },
+          { name: "IV Fluids", icon: "fas fa-prescription-bottle" },
+        ];
+
+        categoryContainer.innerHTML = categories
+          .map(
+            (category) => `
+          <div class="category">
+            <div>
+              <i class="${category.icon} category-icon"></i>
+              <h2 class="category-name">${category.name}</h2>  
+            </div>
+            <button class="view-range-btn">View Range</button>
+          </div>`
+          )
+          .join("");
 
         // Footer
         const footerData = {

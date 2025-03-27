@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alata&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <title>Products | Health Biotech Limited</title>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .nav {
+        position: fixed;
+        top: 0px;
+        width: calc(100% - 68px);
+        z-index: 20;
+        background: #fff;
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+        height: 80px;
+        padding: 0px 34px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .nav-logo {
+          height: 72px;
+          width: auto;
+        }
+
+        .nav-lists {
+          list-style: none;
+          display: flex;
+          gap: 21px;
+          align-items: center;
+
+          .list {
+            a {
+              font-weight: 700;
+              text-transform: uppercase;
+              color: #000000f7;
+              text-decoration: none;
+              font-size: 14px;
+              transition: all;
+              transition-duration: 200ms;
+
+              &:hover {
+                opacity: 0.75;
+              }
+            }
+          }
+
+          .list:nth-child(4) a {
+            color: #d43235;
+          }
+        }
+
+        .hamburger-icon {
+          display: none;
+        }
+
+        .menu {
+          display: none;
+        }
+      }
+
+      .products-page {
+        padding-top: 80px;
+
+        .product-banner {
+          background-image: url("./images/products-banner.jpg");
+          height: 320px;
+          background-position: left;
+          background-size: cover;
+          width: 100%;
+          position: relative;
+          margin-bottom: 80px;
+
+          .banner-title {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-image: linear-gradient(
+              180deg,
+              rgba(209, 36, 38, 0.84) 0%,
+              rgba(255, 53, 43, 0.87) 100%
+            );
+            border-radius: 0 0 96px 0;
+            height: 370px;
+            width: 320px;
+            padding: 0px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            color: #fff;
+
+            h1 {
+              font-size: 50px;
+              font-family: "Raleway", sans-serif;
+              margin-bottom: 15px;
+            }
+            p {
+              font-size: 20px;
+              font-family: "IBM Plex Sans", sans-serif;
+              font-weight: 600;
+            }
+          }
+        }
+        .page-intro {
+          padding: 2% 40px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          .info {
+            padding: 0px 50px;
+            margin: auto;
+            h2 {
+              font-size: 32px;
+              font-family: "Alata", sans-serif;
+              padding-bottom: 30px;
+              color: #d12426;
+
+              span {
+                color: #002850;
+              }
+            }
+            p {
+              font-family: "IBM Plex Sans", sans-serif;
+              font-size: 18px;
+              font-weight: 400;
+              color: #2d2c2a;
+              line-height: 32px;
+            }
+          }
+          .slider-container {
+            width: 350px;
+            overflow: hidden;
+            margin: auto;
+
+            .slider {
+              display: flex;
+              width: 910px;
+              transition: transform 0.5s ease-in-out;
+
+              img {
+                width: 350px;
+                height: auto;
+                object-fit: contain;
+              }
+            }
+
+            .dots-container {
+              margin-top: 10px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .dot {
+                height: 6px;
+                width: 6px;
+                margin: 5px 2px;
+                background-color: #555;
+                border-radius: 50%;
+                display: inline-block;
+                cursor: pointer;
+                transition: background-color 0.3s;
+              }
+              .dot.active {
+                background-color: #2ea3f2;
+                height: 8px;
+                width: 8px;
+              }
+            }
+          }
+        }
+      }
+
+      .footer {
+        background-color: #2d2c2a;
+        color: white;
+        padding-top: 80px;
+        padding-bottom: 64px;
+
+        .footer-container {
+          width: 95%;
+          margin: auto;
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 20px;
+
+          .footer-logo img {
+            height: 42px;
+            width: auto;
+          }
+
+          .footer-section {
+            h3 {
+              font-size: 22px;
+              margin-bottom: 20px;
+              text-transform: uppercase;
+              font-weight: bold;
+            }
+
+            ul {
+              list-style: none;
+              padding: 0;
+
+              li {
+                margin-bottom: 6px;
+                font-size: 15px;
+
+                a {
+                  color: white;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+
+          .directions {
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+          }
+
+          .social-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            a {
+              font-size: 12px;
+              color: #ffffff4f;
+              text-decoration: none;
+              border: 1px solid #ffffff4f;
+              padding: 9px 10px;
+              border-radius: 50%;
+            }
+          }
+        }
+
+        .footer-bottom {
+          width: 95%;
+          margin: 10px auto 0px auto;
+          border-top: 2px solid #ffffff58;
+
+          p {
+            font-size: 14px;
+            padding-top: 28px;
+            font-weight: 300;
+            font-family: "IBM Plex Sans", sans-serif;
+
+            a {
+              color: white;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .nav {
+          position: relative;
+
+          .nav-lists {
+            display: none;
+          }
+
+          .hamburger-icon {
+            display: block;
+            font-size: 28px;
+            color: #d12426;
+          }
+
+          .menu {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            height: 600px;
+            background: #fff;
+            width: 84%;
+            border-top: 4px solid #2ea3f2;
+            transition: all;
+            transition-duration: 300ms;
+            transition-behavior: ease-in;
+
+            .menu-items {
+              list-style: none;
+              padding: 0px 5%;
+
+              .menu-item {
+                padding: 10px 40px;
+                border-bottom: 1px solid #00000008;
+                font-size: 14px;
+                font-weight: 600;
+                font-family: "Poppins", sans-serif;
+
+                a {
+                  width: 100%;
+                  display: block;
+                  text-decoration: none;
+                  color: #000000f7;
+                }
+              }
+
+              .menu-btn {
+                padding: 10px 40px;
+                border-bottom: 1px solid #00000008 !important;
+                font-size: 14px;
+                font-weight: 600;
+                font-family: "Poppins", sans-serif;
+                border: none;
+                background: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+
+                .arrow-down {
+                  color: #d12426;
+                  transition: transform 0.3s ease;
+                }
+
+                .rotate {
+                  transform: rotate(180deg);
+                }
+              }
+              .subMenu-items {
+                list-style: none;
+                margin-left: -20px;
+              }
+            }
+          }
+        }
+
+        .products-page {
+          padding-top: 0px;
+          .product-banner {
+            background-position: top;
+            height: 400px;
+            .banner-title {
+              height: 450px;
+              width: 250px;
+            }
+          }
+          .page-intro {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding: 2% 20px;
+            .info {
+              padding: 0px 20px;
+            }
+          }
+        }
+
+        .footer {
+          width: 100%;
+
+          .footer-container {
+            grid-template-columns: 1fr;
+          }
+
+          .footer-bottom {
+            margin: 30px auto 0px auto;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <img
+        src="https://healthbiotech.in/wp-content/uploads/2024/01/hbl-new-logo-gmp.png"
+        alt="Health Biotech Limited Logo"
+        class="nav-logo"
+      />
+      <ul class="nav-lists">
+        <li class="list">
+          <a href="https://healthbiotech.in/investor-relationship">Investor</a>
+        </li>
+        <li class="list">
+          <a href="https://healthbiotech.in/expertise">Expertise</a>
+        </li>
+        <li class="list">
+          <a href="https://healthbiotech.in/careers">Careers</a>
+        </li>
+        <li class="list">
+          <a href="https://healthbiotech.in/events">Events</a>
+        </li>
+        <li class="list">
+          <a href="https://healthbiotech.in/contact-us">Contact us</a>
+        </li>
+      </ul>
+      <i id="hamburger-icon" class="fa-solid fa-bars hamburger-icon"></i>
+      <div id="menu" class="menu">
+        <ul id="menu-items" class="menu-items"></ul>
+      </div>
+    </nav>
+    <section class="products-page">
+      <div class="product-banner">
+        <div class="banner-title">
+          <h1>Products</h1>
+          <p>
+            Rich portfolio of innovative and generic quality products for
+            transforming patient&apos;s life
+          </p>
+        </div>
+      </div>
+      <div class="page-intro">
+        <div class="info">
+          <h2>
+            <span>Committed to health,</span><br />
+            as life is precious.
+          </h2>
+          <p>
+            We develop complex drugs & focus on New Drug Delivery Systems that
+            are of Premium Quality.
+          </p>
+        </div>
+        <div class="slider-container">
+          <div id="products-slider" class="slider"></div>
+          <div class="dots-container"></div>
+        </div>
+      </div>
+      <div>Products Section</div>
+    </section>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-logo">
+          <img
+            src="https://healthbiotech.in/wp-content/uploads/2021/07/logo_rev.png"
+            alt="Health Biotech Limited"
+          />
+        </div>
+
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <ul id="aboutUsLinks"></ul>
+          <h3>Policies</h3>
+          <ul id="policiesLinks"></ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Our Products</h3>
+          <ul id="productLinks"></ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Head Office</h3>
+          <ul>
+            <li>Health Biotech Limited</li>
+            <li>SCO 162-164 Sector 34 – A,</li>
+            <li>Chandigarh, 160022</li>
+          </ul>
+          <a
+            href="https://www.google.com/maps/place/Health+Biotech+Limited/@30.7223003,76.7710048,2424m/data=!3m1!1e3!4m6!3m5!1s0x390fedb315555555:0xf876ddbe444d1dbc!8m2!3d30.7222887!4d76.7709545!16s%2Fg%2F1td5dhsj?entry=ttu&g_ep=EgoyMDI1MDMxOC4wIKXMDSoASAFQAw%3D%3D"
+            class="directions"
+            >Get Directions</a
+          >
+        </div>
+
+        <div class="footer-section">
+          <h3>Get in Touch</h3>
+          <ul>
+            <li><a href="https://healthbiotech.in/careers">Careers</a></li>
+            <li>
+              <a href="https://healthbiotech.in/contact-us">Contact Us</a>
+            </li>
+            <li>
+              <a href="mailto:enquiry@healthbiotech.in"
+                >enquiry@healthbiotech.in</a
+              >
+            </li>
+            <li><a href="tel:01724685300">01724685300</a></li>
+            <li><a href="tel:+919876882973">+91 987 688 2973</a></li>
+          </ul>
+          <div class="social-links" id="socialLinks"></div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © Health Biotech Limited 2001-2021 | | Created by
+          <a href="https://thebrandpalette.com">TBP</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile Menu
+        const menuData = [
+          {
+            name: "Investor",
+            href: "https://healthbiotech.in/investor-relationship/",
+          },
+          {
+            name: "Expertise",
+            href: "https://healthbiotech.in/investor-relationship/",
+          },
+          {
+            name: "Careers",
+            href: "https://healthbiotech.in/careers/",
+          },
+          {
+            name: "Events",
+            href: "https://healthbiotech.in/events/",
+          },
+          {
+            name: "Contact us",
+            href: "https://healthbiotech.in/contact-us/",
+          },
+          {
+            name: "About us",
+            subItems: [
+              {
+                name: "What we believe",
+                href: "https://healthbiotech.in/what-we-believe/",
+              },
+              {
+                name: "What we do",
+                href: "https://healthbiotech.in/what-we-do/",
+              },
+              {
+                name: "Milestone",
+                href: "https://healthbiotech.in/milestone/",
+              },
+              {
+                name: "Our people",
+                href: "https://healthbiotech.in/our-people-and-leadership/",
+              },
+              {
+                name: "CSR",
+                href: "https://healthbiotech.in/csr/",
+              },
+            ],
+          },
+          {
+            name: "Products",
+            href: "https://healthbiotech.in/products/",
+          },
+          {
+            name: "Business Segments",
+            href: "https://healthbiotech.in/business-segments/",
+          },
+          {
+            name: "Global Presence",
+            href: "https://healthbiotech.in/global-presense/",
+          },
+          {
+            name: "Media",
+            href: "https://healthbiotech.in/media/",
+          },
+          {
+            name: "Blog",
+            href: "https://healthbiotech.in/blog/",
+          },
+          {
+            name: "login",
+            href: "https://healthbiotech.in/login/",
+          },
+          {
+            name: "Logout",
+            href: "https://healthbiotech.in/logout/",
+          },
+        ];
+
+        const hamburgerIcon = document.getElementById("hamburger-icon");
+        const menuDiv = document.getElementById("menu");
+
+        let menuHidden = true;
+        menuDiv.style.display = "none";
+
+        hamburgerIcon.addEventListener("click", () => {
+          menuHidden = !menuHidden;
+
+          menuDiv.style.display = menuHidden ? "none" : "block";
+        });
+
+        const menuItems = document.getElementById("menu-items");
+        menuItems.innerHTML = menuData
+          .map((item, id) =>
+            id === 5
+              ? `<button id="menu-button" class="menu-btn" key=${id}>${
+                  item?.name
+                }<i id="arrow-icon" class="fa-solid arrow-down fa-chevron-down"></i></button> <ul id="subMenu-items" class="subMenu-items">${item?.subItems
+                  ?.map(
+                    (subItem, subId) => `<li key=${subId} class="menu-item">
+                  <a href="${subItem.href}">${subItem?.name}</a>
+                </li>`
+                  )
+                  .join("")}</ul>`
+              : `<li key=${id} class="menu-item">
+                  <a href="${item.href}">${item?.name}</a>
+                </li> `
+          )
+          .join("");
+
+        const subMenu = document.getElementById("subMenu-items");
+        const menuButton = document.getElementById("menu-button");
+        const arrowIcon = document.getElementById("arrow-icon");
+
+        if (subMenu) subMenu.style.display = "none";
+
+        menuButton?.addEventListener("click", () => {
+          const isHidden = subMenu.style.display === "none";
+          subMenu.style.display = isHidden ? "block" : "none";
+          arrowIcon.classList.toggle("rotate");
+        });
+
+        // Products Slider
+
+        const productsData = [
+          {
+            image: "./images/products/ANIDUBIO-50-MG-01.png",
+            name: "ANIDUBIO-50-MG-01",
+          },
+          {
+            image: "./images/products/AZERMAX-100-1.jpg",
+            name: "AZERMAX-100-1",
+          },
+          {
+            image: "./images/products/AZERMAX-200.jpg",
+            name: "AZERMAX-200",
+          },
+          {
+            image: "./images/products/CLARIINTHERA.jpg",
+            name: "CLARIINTHERA",
+          },
+          {
+            image: "./images/products/DICLOINTHERA-SUPOSITORY.jpg",
+            name: "DICLOINTHERA-SUPOSITORY",
+          },
+          {
+            image: "./images/products/INTHERA-BN-5-GM-1.jpg",
+            name: "INTHERA-BN-5-GM-1",
+          },
+          {
+            image: "./images/products/INTHERACEP-IN-1-scaled.jpg",
+            name: "INTHERACEP-IN-1-scaled",
+          },
+          {
+            image: "./images/products/INTHERACOL-5-GM-1.jpg",
+            name: "INTHERACOL-5-GM-1",
+          },
+          {
+            image: "./images/products/INTHERADOXO-10-MG-1.jpg",
+            name: "INTHERADOXO-10-MG-1",
+          },
+          {
+            image: "./images/products/INTHERAFIX-30ml.jpg",
+            name: "INTHERAFIX-30ml",
+          },
+          {
+            image: "./images/products/INTHERAIBU-IN-1-scaled.jpg",
+            name: "INTHERAIBU-IN-1-scaled",
+          },
+          {
+            image: "./images/products/INTHERALEVO.jpg",
+            name: "INTHERALEVO",
+          },
+          {
+            image: "./images/products/INTHERAMOX-250-scaled.jpg",
+            name: "INTHERAMOX-250-scaled",
+          },
+          {
+            image: "./images/products/INTHERAMOX-500-1-scaled.jpg",
+            name: "INTHERAMOX-500-1-scaled",
+          },
+          {
+            image: "./images/products/INTHERAMOXCLA-1-scaled.jpg",
+            name: "INTHERAMOXCLA-1-scaled",
+          },
+          {
+            image: "./images/products/INTHERAPAC-30-MG-1.jpg",
+            name: "INTHERAPAC-30-MG-1",
+          },
+          {
+            image: "./images/products/Intheraval-1.jpg",
+            name: "Intheraval-1",
+          },
+          {
+            image: "./images/products/INTHERETHOSU-100-ML.jpg",
+            name: "INTHERETHOSU-100-ML",
+          },
+          {
+            image: "./images/products/INTHERPROZI-susp-1.jpg",
+            name: "INTHERPROZI-susp-1",
+          },
+          {
+            image: "./images/products/KASTINTHERA-4-MG-SACHET-1-scaled.jpg",
+            name: "KASTINTHERA-4-MG-SACHET-1-scaled",
+          },
+          {
+            image: "./images/products/MICABIO-100mg.png",
+            name: "MICABIO-100mg",
+          },
+          {
+            image: "./images/products/PEECLAV-DDS-scaled.jpg",
+            name: "PEECLAV-DDS-scaled",
+          },
+          {
+            image: "./images/products/RESIME-1.5-1.jpg",
+            name: "RESIME-1.5-1",
+          },
+          {
+            image: "./images/products/SYMOPROX-40-1-scaled.jpg",
+            name: "SYMOPROX-40-1-scaled",
+          },
+          {
+            image: "./images/products/Thiaera-1.jpg",
+            name: "Thiaera-1",
+          },
+          {
+            image: "/images/products/TOBINTHERA-300-MG-1.jpg",
+            name: "TOBINTHERA-300-MG-1",
+          },
+        ];
+
+        let slider = document.querySelector("#products-slider");
+        let dotsContainer = document.querySelector(".dots-container");
+
+        slider.innerHTML = productsData
+          .map(
+            (product, id) =>
+              `<img src="${product?.image}" alt="${product?.name}" />`
+          )
+          .join("");
+
+        let images = slider.children;
+        let index = 0;
+
+        // Create dots
+        for (let i = 0; i < images.length; i++) {
+          let dot = document.createElement("span");
+          dot.classList.add("dot");
+          if (i === 0) dot.classList.add("active"); // First dot active by default
+          dot.addEventListener("click", () => goToSlide(i));
+          dotsContainer.appendChild(dot);
+        }
+
+        let dots = document.querySelectorAll(".dot");
+
+        function updateDots() {
+          dots.forEach((dot, i) => {
+            dot.classList.toggle("active", i === index);
+          });
+        }
+
+        function goToSlide(slideIndex) {
+          index = slideIndex;
+          slider.style.transform = `translateX(${-index * 350}px)`; // Adjust for image width
+          updateDots();
+        }
+
+        function slideImages() {
+          index++;
+          if (index >= images.length) index = 0;
+          goToSlide(index);
+        }
+
+        setInterval(slideImages, 3000);
+
+        // Footer
+        const footerData = {
+          aboutUs: [
+            { name: "What We Do", href: "https://healthbiotech.in/what-we-do" },
+            {
+              name: "What We Believe",
+              href: "https://healthbiotech.in/what-we-believe",
+            },
+            {
+              name: "Our Team",
+              href: "https://healthbiotech.in/our-people-and-leadership",
+            },
+            { name: "Milestone", href: "https://healthbiotech.in/milestone" },
+            {
+              name: "Social Impact",
+              href: "https://healthbiotech.in/social-impact",
+            },
+            { name: "Our Blog", href: "https://healthbiotech.in/blog" },
+          ],
+          ourProducts: [
+            {
+              name: "Anti Biotic",
+              href: "https://healthbiotech.in/products-new",
+            },
+            {
+              name: "Anti Fungal",
+              href: "https://healthbiotech.in/products-new",
+            },
+            {
+              name: "Anti Viral",
+              href: "https://healthbiotech.in/products-new",
+            },
+            {
+              name: "Cardiovascular",
+              href: "https://healthbiotech.in/products-new",
+            },
+            {
+              name: "Gastrointestinal",
+              href: "https://healthbiotech.in/products-new",
+            },
+            {
+              name: "Gynaecology",
+              href: "https://healthbiotech.in/products-new",
+            },
+            { name: "Oncology", href: "https://healthbiotech.in/products-new" },
+          ],
+          policies: [
+            {
+              name: "Privacy Policy",
+              href: "https://healthbiotech.in/privacy",
+            },
+            {
+              name: "Terms of Use",
+              href: "https://healthbiotech.in/terms-of-service",
+            },
+          ],
+          socialLinks: [
+            {
+              icon: "fab fa-facebook-f",
+              href: "https://www.facebook.com/healthbiotech",
+              ariaLabel: "Follow on Facebook",
+            },
+            {
+              icon: "fab fa-linkedin-in",
+              href: "https://www.linkedin.com/company/health-biotech-limited",
+              ariaLabel: "Follow on Linkedln",
+            },
+            {
+              icon: "fab fa-twitter",
+              href: "https://x.com/healthbiotech",
+              ariaLabel: "Follow on Twitter",
+            },
+            {
+              icon: "fab fa-instagram",
+              href: "https://www.instagram.com/healthbiotech",
+              ariaLabel: "Follow on Instagram",
+            },
+          ],
+        };
+
+        function populateList(id, items) {
+          const list = document.getElementById(id);
+          list.innerHTML = items
+            .map((item) => `<li><a href="${item.href}">${item.name}</a></li>`)
+            .join("");
+        }
+
+        function populateSocialLinks() {
+          const container = document.getElementById("socialLinks");
+          container.innerHTML = footerData.socialLinks
+            .map(
+              (link) =>
+                `<a title="${link.ariaLabel}" href="${link.href}" class="${link.icon}"></a>`
+            )
+            .join("");
+        }
+
+        populateList("aboutUsLinks", footerData.aboutUs);
+        populateList("policiesLinks", footerData.policies);
+        populateList("productLinks", footerData.ourProducts);
+        populateSocialLinks();
+      });
+    </script>
+  </body>
+</html>

@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Alata&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -127,11 +127,13 @@
           }
         }
         .page-intro {
-          padding: 2% 40px;
+          padding: 2% 0px 3% 0px;
+          width: 80%;
+          margin: auto;
+          border-bottom: 2px solid #e8e8e8;
           display: grid;
           grid-template-columns: 1fr 1fr;
           .info {
-            padding: 0px 50px;
             margin: auto;
             h2 {
               font-size: 32px;
@@ -190,6 +192,35 @@
               }
             }
           }
+        }
+        .features {
+          padding: 3% 0px;
+          width: 90%;
+          margin: auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .feature {
+            text-align: center;
+            padding: 10px 0px;
+            .feature-icon {
+              height: 64px;
+              width: 64px;
+            }
+            .feature-title {
+              font-family: "Jost", sans-serif;
+              margin-top: 15px;
+              color: #d12426;
+              font-size: 30px;
+              font-weight: bold;
+            }
+          }
+        }
+        .categories {
+          background: #f4f4f8;
+          padding: 2% 30px;
+          margin-top: 4%;
         }
       }
 
@@ -361,6 +392,7 @@
           .product-banner {
             background-position: top;
             height: 400px;
+
             .banner-title {
               height: 450px;
               width: 250px;
@@ -369,10 +401,17 @@
           .page-intro {
             grid-template-columns: 1fr;
             gap: 30px;
-            padding: 2% 20px;
+            padding: 2% 0px;
+            padding-bottom: 30px;
+            width: calc(100% - 40px);
             .info {
               padding: 0px 20px;
             }
+          }
+          .features {
+            flex-direction: column;
+            padding-top: 30px;
+            gap: 15px;
           }
         }
 
@@ -445,7 +484,41 @@
           <div class="dots-container"></div>
         </div>
       </div>
-      <div>Products Section</div>
+      <div class="features">
+        <div class="feature">
+          <img
+            src="./images/icons/drugs.png"
+            alt="Drugs Icon"
+            class="feature-icon"
+          />
+          <h4 class="feature-title">Rich Portfolio</h4>
+        </div>
+        <div class="feature">
+          <img
+            src="./images/icons/profit.png"
+            alt="Profit Icon"
+            class="feature-icon"
+          />
+          <h4 class="feature-title">Cost Effective</h4>
+        </div>
+        <div class="feature">
+          <img
+            src="./images/icons/check.png"
+            alt="check Icon"
+            class="feature-icon"
+          />
+          <h4 class="feature-title">Proven Quality</h4>
+        </div>
+        <div class="feature">
+          <img
+            src="./images/icons/flask.png"
+            alt="Flask Icon"
+            class="feature-icon"
+          />
+          <h4 class="feature-title">Strong R&D</h4>
+        </div>
+      </div>
+      <div class="categories">Categories</div>
     </section>
     <footer class="footer">
       <div class="footer-container">

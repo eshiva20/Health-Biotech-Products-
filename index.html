@@ -313,8 +313,100 @@
             }
           }
           .view-all-container {
+            #products {
+              font-family: "Poppins", sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+
+              tbody {
+                font-size: 12px;
+              }
+
+              td,
+              th {
+                border: 1px solid #ddd;
+                padding: 8px;
+
+                .view-img-btn {
+                  background: none;
+                  outline: none;
+                  border: none;
+                  color: #d12427cb;
+                  text-transform: uppercase;
+                  text-decoration: underline;
+                  cursor: pointer;
+                  font-size: 12px;
+
+                  &:hover {
+                    color: #a40508;
+                  }
+                }
+              }
+
+              tr:nth-child(even) {
+                background-color: #f2f2f2;
+              }
+
+              /* tr:hover {
+                cursor: pointer;
+                background-color: #ddd;
+              } */
+
+              th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                font-family: "IBM Plex Sans", sans-serif;
+                background-color: #d12426;
+                color: white;
+              }
+            }
+
+            .modal-overlay {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(0, 0, 0, 0.7);
+              display: none;
+              align-items: center;
+              justify-content: center;
+              z-index: 1000;
+
+              .modal {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                text-align: center;
+                position: relative;
+
+                .close-btn {
+                  position: absolute;
+                  top: 10px;
+                  right: 15px;
+                  background: red;
+                  color: white;
+                  border: none;
+                  padding: 5px 10px;
+                  cursor: pointer;
+                  font-size: 16px;
+                  border-radius: 4px;
+                }
+
+                img {
+                  max-width: 100%;
+                  width: auto;
+                  height: 400px;
+                  border-radius: 5px;
+                }
+              }
+            }
           }
         }
+      }
+      body.no-scroll {
+        overflow: hidden;
       }
 
       .footer {
@@ -507,11 +599,23 @@
             gap: 15px;
           }
           .categories {
+            padding: 2% 15px;
             .categories-tabs {
               margin: 30px auto;
             }
             .view-category-container {
               grid-template-columns: repeat(1, 1fr);
+            }
+            .view-all-container {
+              overflow-y: scroll;
+              .modal-overlay {
+                .modal {
+                  margin: 0px 10px;
+                  img {
+                    height: auto;
+                  }
+                }
+              }
             }
           }
         }
@@ -624,9 +728,30 @@
           <button id="category-view" class="tab active">Category View</button>
           <button id="view-all" class="tab">View All</button>
         </div>
+
         <div id="view-category-container" class="view-category-container"></div>
         <div id="view-all-container" class="view-all-container">
-          View All categories
+          <table id="products">
+            <thead>
+              <tr>
+                <th>SAP Product Code</th>
+                <th>Therapeutic Form</th>
+                <th>Finished Form</th>
+                <th>Composition</th>
+                <th>Strength</th>
+                <th>Product Description</th>
+                <th>Primary Packing</th>
+                <th>Image</th>
+              </tr>
+            </thead>
+            <tbody id="products-table-body"></tbody>
+          </table>
+          <div class="modal-overlay" id="modalOverlay">
+            <div class="modal">
+              <button class="close-btn" id="closeBtn">×</button>
+              <img id="modalImage" src="" alt="Preview Image" />
+            </div>
+          </div>
         </div>
       </section>
     </section>
@@ -991,7 +1116,7 @@
         categoryTab.addEventListener("click", () => switchTab("category"));
         viewAllTab.addEventListener("click", () => switchTab("view-all"));
 
-        switchTab("category");
+        switchTab("view-all");
 
         // Mapping Category Cards
 
@@ -1027,6 +1152,220 @@
           </div>`
           )
           .join("");
+
+        //  Mapping Table Content for view all categories
+
+        const productsList = [
+          {
+            sapProductCode: "10001",
+            therapeuticCategory: "ANAESTHETIC",
+            finishedForm: "INJECTIONS",
+            composition: "PROPOFOL",
+            strength: "1% W / V",
+            productDescription: "LIQUID",
+            primaryPacking: "20 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10002",
+            therapeuticCategory: "ANAESTHETIC",
+            finishedForm: "INJECTIONS",
+            composition: "PROPOFOL",
+            strength: "2% W / V",
+            productDescription: "LIQUID",
+            primaryPacking: "20 ML VIAL",
+            image: "./images/products/ANIDUBIO-50-MG-01.png",
+          },
+          {
+            sapProductCode: "10003",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "CEFOPERAZONE + SULBACTAM",
+            strength: "500 MG + 500 MG",
+            productDescription: "DRY POWDER",
+            primaryPacking: "20 ML VIAL",
+            image: "./images/products/AZERMAX-100-1.jpg",
+          },
+          {
+            sapProductCode: "10005",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "AZITHROMYCIN",
+            strength: "500 MG",
+            productDescription: "LYOPHILIZED POWDER",
+            primaryPacking: "10 ML VIAL",
+            image: "./images/products/AZERMAX-200.jpg",
+          },
+          {
+            sapProductCode: "10006",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "AZTREONAM",
+            strength: "1 GM",
+            productDescription: "DRY POWDER",
+            primaryPacking: "10 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10008",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "CEFOTAXIME",
+            strength: "1 GM",
+            productDescription: "DRY POWDER",
+            primaryPacking: "10 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10009",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "CEFTIZOXIME",
+            strength: "1 GM",
+            productDescription: "DRY POWDER",
+            primaryPacking: "20 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10010",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "CEFTRIAXONE",
+            strength: "1 GM",
+            productDescription: "DRY POWDER",
+            primaryPacking: "10 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10011",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "CHLORAMPHENICOL SODIUM SUCCINATE",
+            strength: "1 GM",
+            productDescription: "DRY POWDER",
+            primaryPacking: "10 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10012",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "ERTAPENEM",
+            strength: "1 GM",
+            productDescription: "LYOPHILIZED",
+            primaryPacking: "10 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10013",
+            therapeuticCategory: "ONCOLOGY",
+            finishedForm: "INJECTIONS",
+            composition: "GEMCITABINE",
+            strength: "1 GM",
+            productDescription: "LYOPHILIZED",
+            primaryPacking: "50 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10014",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "MEROPENEM",
+            strength: "1 GM",
+            productDescription: "DRY POWDER",
+            primaryPacking: "20 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10015",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "VANCOMYCIN",
+            strength: "1 GM",
+            productDescription: "DRY POWDER",
+            primaryPacking: "10 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10017",
+            therapeuticCategory: "ONCOLOGY",
+            finishedForm: "INJECTIONS",
+            composition: "VINCRISTINE",
+            strength: "1 MG / ML",
+            productDescription: "LIQUID",
+            primaryPacking: "2 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10019",
+            therapeuticCategory: "ONCOLOGY",
+            finishedForm: "INJECTIONS",
+            composition: "VINBLASTINE",
+            strength: "1 MG / ML",
+            productDescription: "LIQUID",
+            primaryPacking: "10 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+          {
+            sapProductCode: "10025",
+            therapeuticCategory: "ANTI-BIOTIC & ANTI-INFECTIVE",
+            finishedForm: "INJECTIONS",
+            composition: "COLISTIMETHATE",
+            strength: "1 M IU",
+            productDescription: "LYOPHILIZED",
+            primaryPacking: "10 ML VIAL",
+            image: "https://placehold.co/600x400",
+          },
+        ];
+
+        const tableBody = document.getElementById("products-table-body");
+
+        tableBody.innerHTML = productsList
+          .map(
+            (product) => `
+              <tr>
+                <td>${product.sapProductCode}</td>
+                <td>${product.therapeuticCategory}</td>
+                <td>${product.finishedForm}</td>
+                <td>${product.composition}</td>
+                <td>${product.strength}</td>
+                <td>${product.productDescription}</td>
+                <td>${product.primaryPacking}</td>
+                <td><button data-image="${product.image}" class="view-img-btn">View</button></td>
+              </tr>`
+          )
+          .join("");
+
+        // View Image Modal
+
+        const modalOverlay = document.getElementById("modalOverlay");
+        const modalImage = document.getElementById("modalImage");
+        const closeBtn = document.getElementById("closeBtn");
+        const body = document.body;
+
+        // Add event listener to all "View" buttons
+        document.querySelectorAll(".view-img-btn").forEach((button) => {
+          button.addEventListener("click", (event) => {
+            const imageUrl = event.target.getAttribute("data-image");
+            modalImage.src = imageUrl; // Set the correct image
+            modalOverlay.style.display = "flex";
+            body.classList.add("no-scroll"); // Disable scrolling
+          });
+        });
+
+        // Close modal function
+        closeBtn.addEventListener("click", () => {
+          modalOverlay.style.display = "none";
+          body.classList.remove("no-scroll"); // Enable scrolling
+        });
+
+        // Close modal when clicking outside the modal
+        modalOverlay.addEventListener("click", (event) => {
+          if (event.target === modalOverlay) {
+            modalOverlay.style.display = "none";
+            body.classList.remove("no-scroll");
+          }
+        });
 
         // Footer
         const footerData = {

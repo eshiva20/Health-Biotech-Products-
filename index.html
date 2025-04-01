@@ -224,12 +224,11 @@
           .categories-tabs {
             width: fit-content;
             margin-left: auto;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             display: flex;
             gap: 10px;
             padding: 8px 16px;
             border-radius: 18px 0px 18px 0px;
-
             background: #d12426;
             .tab {
               padding: 4px 10px;
@@ -387,6 +386,40 @@
             }
           }
           .view-all-container {
+            .searchbar {
+              margin-bottom: 12px;
+              text-align: right;
+              border: 1px solid #666;
+              border-radius: 7px;
+              width: 250px;
+              margin-left: auto;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              gap: 5px;
+              padding: 5px 10px;
+              .search-icon {
+                /* color: #555; */
+                color: #d1242789;
+              }
+              input {
+                padding: 2px;
+                border: none;
+                outline: none;
+                width: 100%;
+                background: transparent;
+                font-family: "IBM Plex Sans", sans-serif;
+              }
+              /* button {
+                padding: 6px 10px;
+                cursor: pointer;
+                border-radius: 5px;
+                outline: none;
+                border: 1px solid #555;
+                color: #d12426;
+                font-family: "IBM Plex Sans", sans-serif;
+              } */
+            }
             #products {
               font-family: "Poppins", sans-serif;
               border-collapse: collapse;
@@ -674,7 +707,7 @@
           .categories {
             padding: 2% 15px;
             .categories-tabs {
-              margin: 30px auto;
+              margin: 20px auto;
             }
             .view-category-container {
               .all-categories-cards {
@@ -690,6 +723,11 @@
             }
             .view-all-container {
               overflow-y: scroll;
+              .searchbar {
+                margin: 0px auto 20px auto;
+                position: sticky;
+                left: 0px;
+              }
             }
           }
           .modal-overlay {
@@ -839,6 +877,10 @@
           </div>
         </div>
         <div id="view-all-container" class="view-all-container">
+          <div class="searchbar">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" placeholder="Search by..." />
+          </div>
           <table id="products">
             <thead>
               <tr>
@@ -1237,7 +1279,7 @@
         categoryTab.addEventListener("click", () => switchTab("category"));
         viewAllTab.addEventListener("click", () => switchTab("view-all"));
 
-        switchTab("category");
+        switchTab("view-all");
 
         // Mapping Category Cards----------------------------------------------------
 
@@ -1500,11 +1542,11 @@
           },
         ];
 
-        const tableBody = document.getElementById("products-table-body");
-
-        tableBody.innerHTML = productsList
-          .map(
-            (product) => `
+        function displayProducts(products) {
+          const tableBody = document.getElementById("products-table-body");
+          tableBody.innerHTML = products
+            .map(
+              (product) => `
               <tr>
                 <td>${product.sapProductCode}</td>
                 <td>${product.therapeuticCategory}</td>
@@ -1515,38 +1557,51 @@
                 <td>${product.primaryPacking}</td>
                 <td><button data-image="${product.image}" class="view-img-btn">View</button></td>
               </tr>`
-          )
-          .join("");
+            )
+            .join("");
 
-        // View Image Modal
-        const modalOverlay = document.getElementById("modalOverlay");
-        const modalImage = document.getElementById("modalImage");
-        const closeBtn = document.getElementById("closeBtn");
-        const body = document.body;
-
-        // Add event listener to all "View" buttons
-        document.querySelectorAll(".view-img-btn").forEach((button) => {
-          button.addEventListener("click", (event) => {
-            const imageUrl = event.target.getAttribute("data-image");
-            modalImage.src = imageUrl;
-            modalOverlay.style.display = "flex";
-            body.classList.add("no-scroll");
+          // Attach event listeners to "View" buttons
+          document.querySelectorAll(".view-img-btn").forEach((button) => {
+            button.addEventListener("click", (event) => {
+              const imageUrl = event.target.getAttribute("data-image");
+              document.getElementById("modalImage").src = imageUrl;
+              document.getElementById("modalOverlay").style.display = "flex";
+              document.body.classList.add("no-scroll");
+            });
           });
+        }
+
+        displayProducts(productsList);
+
+        // SEARCH FUNCTIONALITY
+        document
+          .querySelector(".searchbar input")
+          .addEventListener("input", (event) => {
+            const searchTerm = event.target.value.toLowerCase();
+
+            const filteredProducts = productsList.filter(
+              (product) =>
+                product.composition.toLowerCase().includes(searchTerm) ||
+                product.finishedForm.toLowerCase().includes(searchTerm) ||
+                product.therapeuticCategory.toLowerCase().includes(searchTerm)
+            );
+
+            displayProducts(filteredProducts);
+          });
+
+        document.getElementById("closeBtn").addEventListener("click", () => {
+          document.getElementById("modalOverlay").style.display = "none";
+          document.body.classList.remove("no-scroll");
         });
 
-        // Close modal function
-        closeBtn.addEventListener("click", () => {
-          modalOverlay.style.display = "none";
-          body.classList.remove("no-scroll");
-        });
-
-        // Close modal when clicking outside the modal
-        modalOverlay.addEventListener("click", (event) => {
-          if (event.target === modalOverlay) {
-            modalOverlay.style.display = "none";
-            body.classList.remove("no-scroll");
-          }
-        });
+        document
+          .getElementById("modalOverlay")
+          .addEventListener("click", (event) => {
+            if (event.target === document.getElementById("modalOverlay")) {
+              document.getElementById("modalOverlay").style.display = "none";
+              document.body.classList.remove("no-scroll");
+            }
+          });
 
         // Footer----------------------------------------
         const footerData = {

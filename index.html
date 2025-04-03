@@ -382,6 +382,24 @@
                   background-color: #d12426;
                   color: white;
                 }
+                .documents {
+                  font-size: 12px;
+                  h2 {
+                    font-size: 12px;
+                    margin-bottom: 10px;
+                    font-weight: 600;
+                    color: #111111;
+                  }
+                  .status {
+                    font-weight: 800;
+                    padding: 0px 3px;
+                    color: #d12426;
+                  }
+                  p:nth-child(6) {
+                    margin-top: 6px;
+                    font-weight: 500;
+                  }
+                }
               }
             }
           }
@@ -497,6 +515,7 @@
                   margin-top: 5px;
                   border-radius: 3px;
                   cursor: pointer;
+                  background: #fff;
 
                   &:hover {
                     opacity: 0.99;
@@ -952,6 +971,7 @@
                   <th>Composition</th>
                   <th>Strength</th>
                   <th>Product Description</th>
+                  <th>Documents</th>
                   <th>Primary Packing</th>
                   <th>Image</th>
                 </tr>
@@ -974,7 +994,7 @@
                 <th>Composition</th>
                 <th>Strength</th>
                 <th>Product Description</th>
-                <th>Document</th>
+                <th>Documents</th>
                 <th>Primary Packing</th>
                 <th>
                   Image <button id="view-all-images">View All Images</button>
@@ -1444,8 +1464,34 @@
                   <td>${product.composition}</td>
                   <td>${product.strength}</td>
                   <td>${product.productDescription}</td>
+                  <td>
+                    <div class="documents">
+                      <h2>Product Permission Domestic & Export</h2>
+                      <p>COPP: <span class="status">${
+                        product?.documents?.COPP ? "✓" : "-"
+                      }</span></p>
+                      <p>FSC: <span class="status">${
+                        product?.documents?.FSC ? "✓" : "-"
+                      }</span></p>
+                      <p>COA: <span class="status">${
+                        product?.documents?.COA ? "✓" : "-"
+                      }</span></p>
+                      <p>MSDS: <span class="status">${
+                        product?.documents?.MSDS ? "✓" : "-"
+                      }</span></p>
+                      <p>Dossier</p>
+                      <p>CTD: <span class="status">${
+                        product?.documents?.CTD ? "✓" : "-"
+                      }</span></p>
+                      <p>ACTD: <span class="status">${
+                        product?.documents?.ACTD ? "✓" : "-"
+                      }</span></p>
+                    </div>               
+                  </td>
                   <td>${product.primaryPacking}</td>
-                  <td><button data-image="${product.image}" class="view-img-btn">View</button></td>
+                  <td><button data-image="${
+                    product.image
+                  }" class="view-img-btn">View</button></td>
                 </tr>
               `
               )

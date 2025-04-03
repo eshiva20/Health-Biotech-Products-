@@ -450,6 +450,25 @@
                 }
               }
 
+              .documents {
+                font-size: 12px;
+                h2 {
+                  font-size: 12px;
+                  margin-bottom: 10px;
+                  font-weight: 600;
+                  color: #111111;
+                }
+                .status {
+                  font-weight: 800;
+                  padding: 0px 3px;
+                  color: #d12426;
+                }
+                p:nth-child(6) {
+                  margin-top: 6px;
+                  font-weight: 500;
+                }
+              }
+
               tr:nth-child(even) {
                 background-color: #f2f2f2;
               }
@@ -467,9 +486,29 @@
                 background-color: #d12426;
                 color: white;
               }
+              th:nth-child(9) {
+                text-align: center;
+
+                button {
+                  border: 1px solid #d12426;
+                  padding: 5px 10px;
+                  font-size: 10px;
+                  text-transform: uppercase;
+                  margin-top: 5px;
+                  border-radius: 3px;
+                  cursor: pointer;
+
+                  &:hover {
+                    opacity: 0.99;
+                    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                  }
+                }
+              }
             }
           }
         }
+
+        #allImagesModalOverlay,
         .modal-overlay {
           position: fixed;
           top: 0;
@@ -507,6 +546,44 @@
               width: auto;
               height: 400px;
               border-radius: 5px;
+            }
+          }
+        }
+
+        #allImagesModalOverlay {
+          display: none;
+          .modal {
+            height: calc(100% - 80px);
+            overflow: auto;
+            padding: 40px 20px;
+            .close-btn {
+              position: fixed;
+              top: 10px;
+              right: 30px;
+            }
+            .all-product-images {
+              display: grid;
+              grid-template-columns: repeat(5, 1fr);
+              gap: 10px;
+              .product-img-cover {
+                margin-top: 20px;
+                background: #80808039;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                img {
+                  height: 100%;
+                  width: auto;
+                }
+                .product-composition {
+                  font-size: 14px;
+                  margin-top: 10px;
+                  font-weight: 500;
+                }
+              }
             }
           }
         }
@@ -734,12 +811,19 @@
             .modal {
               margin: 0px 10px;
               img {
-                height: auto;
+                height: auto !important;
+              }
+            }
+          }
+          #allImagesModalOverlay {
+            .modal {
+              margin: 0px;
+              .all-product-images {
+                grid-template-columns: repeat(2, 1fr);
               }
             }
           }
         }
-
         .footer {
           width: 100%;
 
@@ -890,8 +974,11 @@
                 <th>Composition</th>
                 <th>Strength</th>
                 <th>Product Description</th>
+                <th>Document</th>
                 <th>Primary Packing</th>
-                <th>Image</th>
+                <th>
+                  Image <button id="view-all-images">View All Images</button>
+                </th>
               </tr>
             </thead>
             <tbody id="products-table-body"></tbody>
@@ -902,6 +989,14 @@
         <div class="modal">
           <button class="close-btn" id="closeBtn">×</button>
           <img id="modalImage" src="" alt="Preview Image" />
+        </div>
+      </div>
+      <div class="modal-overlay" id="allImagesModalOverlay">
+        <div class="modal">
+          <button class="close-btn" id="viewAllImagesModalCloseBtn">×</button>
+          <div id="all-product-images" class="all-product-images">
+            Here comes All the Product Images
+          </div>
         </div>
       </div>
     </section>
@@ -1279,7 +1374,7 @@
         categoryTab.addEventListener("click", () => switchTab("category"));
         viewAllTab.addEventListener("click", () => switchTab("view-all"));
 
-        switchTab("category");
+        switchTab("view-all"); //Default tab Selected
 
         // Mapping Category Cards----------------------------------------------------
 
@@ -1309,7 +1404,7 @@
           <div class="category">
             <div>
               <i class="${category.icon} category-icon"></i>
-              <h2 class="category-name">${category.name}</h2>  
+              <h2 class="category-name">${category.name}</h2>
             </div>
             <button class="view-range-btn">View Range</button>
           </div>`
@@ -1388,7 +1483,15 @@
             strength: "1% W / V",
             productDescription: "LIQUID",
             primaryPacking: "20 ML VIAL",
-            image: "https://placehold.co/600x400",
+            image: "./images/products/ANIDUBIO-50-MG-01.png",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10002",
@@ -1399,6 +1502,14 @@
             productDescription: "LIQUID",
             primaryPacking: "20 ML VIAL",
             image: "./images/products/ANIDUBIO-50-MG-01.png",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10003",
@@ -1409,6 +1520,14 @@
             productDescription: "DRY POWDER",
             primaryPacking: "20 ML VIAL",
             image: "./images/products/AZERMAX-100-1.jpg",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10005",
@@ -1419,6 +1538,14 @@
             productDescription: "LYOPHILIZED POWDER",
             primaryPacking: "10 ML VIAL",
             image: "./images/products/AZERMAX-200.jpg",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10006",
@@ -1429,6 +1556,14 @@
             productDescription: "DRY POWDER",
             primaryPacking: "10 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10008",
@@ -1439,6 +1574,14 @@
             productDescription: "DRY POWDER",
             primaryPacking: "10 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10009",
@@ -1449,6 +1592,14 @@
             productDescription: "DRY POWDER",
             primaryPacking: "20 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10010",
@@ -1459,6 +1610,14 @@
             productDescription: "DRY POWDER",
             primaryPacking: "10 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10011",
@@ -1469,6 +1628,14 @@
             productDescription: "DRY POWDER",
             primaryPacking: "10 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10012",
@@ -1479,6 +1646,14 @@
             productDescription: "LYOPHILIZED",
             primaryPacking: "10 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10013",
@@ -1489,6 +1664,14 @@
             productDescription: "LYOPHILIZED",
             primaryPacking: "50 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10014",
@@ -1499,6 +1682,14 @@
             productDescription: "DRY POWDER",
             primaryPacking: "20 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10015",
@@ -1509,6 +1700,14 @@
             productDescription: "DRY POWDER",
             primaryPacking: "10 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10017",
@@ -1519,6 +1718,14 @@
             productDescription: "LIQUID",
             primaryPacking: "2 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10019",
@@ -1529,6 +1736,14 @@
             productDescription: "LIQUID",
             primaryPacking: "10 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
           {
             sapProductCode: "10025",
@@ -1539,6 +1754,14 @@
             productDescription: "LYOPHILIZED",
             primaryPacking: "10 ML VIAL",
             image: "https://placehold.co/600x400",
+            documents: {
+              COPP: true,
+              FSC: true,
+              COA: true,
+              MSDS: true,
+              CTD: false,
+              ACTD: false,
+            },
           },
         ];
 
@@ -1554,8 +1777,34 @@
                 <td>${product.composition}</td>
                 <td>${product.strength}</td>
                 <td>${product.productDescription}</td>
+                <td>
+                  <div class="documents">
+                    <h2>Product Permission Domestic & Export</h2>
+                    <p>COPP: <span class="status">${
+                      product?.documents?.COPP ? "✓" : "-"
+                    }</span></p>
+                    <p>FSC: <span class="status">${
+                      product?.documents?.FSC ? "✓" : "-"
+                    }</span></p>
+                    <p>COA: <span class="status">${
+                      product?.documents?.COA ? "✓" : "-"
+                    }</span></p>
+                    <p>MSDS: <span class="status">${
+                      product?.documents?.MSDS ? "✓" : "-"
+                    }</span></p>
+                    <p>Dossier</p>
+                    <p>CTD: <span class="status">${
+                      product?.documents?.CTD ? "✓" : "-"
+                    }</span></p>
+                    <p>ACTD: <span class="status">${
+                      product?.documents?.ACTD ? "✓" : "-"
+                    }</span></p>
+                  </div>               
+                </td>
                 <td>${product.primaryPacking}</td>
-                <td><button data-image="${product.image}" class="view-img-btn">View</button></td>
+                <td><button data-image="${
+                  product.image
+                }" class="view-img-btn">View</button></td>
               </tr>`
             )
             .join("");
@@ -1601,6 +1850,35 @@
               document.getElementById("modalOverlay").style.display = "none";
               document.body.classList.remove("no-scroll");
             }
+          });
+
+        // View All Images ----------------------------------------------
+
+        allProductImages = document.getElementById("all-product-images");
+        allProductImages.innerHTML = productsList
+          .map(
+            (product) =>
+              `<div class="product-img-cover">
+                <img src=${product?.image} alt=${product?.composition}/>
+                <p class="product-composition">${product?.composition}</p>  
+              </div>`
+          )
+          .join("");
+
+        document
+          .getElementById("view-all-images")
+          .addEventListener("click", () => {
+            document.getElementById("allImagesModalOverlay").style.display =
+              "block";
+            document.body.classList.add("no-scroll");
+          });
+
+        document
+          .getElementById("viewAllImagesModalCloseBtn")
+          .addEventListener("click", () => {
+            document.getElementById("allImagesModalOverlay").style.display =
+              "none";
+            document.body.classList.remove("no-scroll");
           });
 
         // Footer----------------------------------------

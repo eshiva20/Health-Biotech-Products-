@@ -384,20 +384,35 @@
                 }
                 .documents {
                   font-size: 12px;
+
                   h2 {
                     font-size: 12px;
                     margin-bottom: 10px;
                     font-weight: 600;
                     color: #111111;
+                    white-space: nowrap;
                   }
-                  .status {
-                    font-weight: 800;
-                    padding: 0px 3px;
-                    color: #d12426;
+
+                  div {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    white-space: nowrap;
+                    gap: 3px 5px;
+
+                    .status {
+                      font-weight: 800;
+                      padding: 0px 3px;
+                      color: #d12426;
+                    }
                   }
-                  p:nth-child(6) {
+                  .dossiers {
                     margin-top: 6px;
-                    font-weight: 500;
+                    h2 {
+                      grid-column-start: 1;
+                      grid-column-end: 4;
+                      margin-bottom: 0px;
+                    }
+                    /* font-weight: 500; */
                   }
                 }
               }
@@ -470,20 +485,35 @@
 
               .documents {
                 font-size: 12px;
+
                 h2 {
                   font-size: 12px;
                   margin-bottom: 10px;
                   font-weight: 600;
                   color: #111111;
+                  white-space: nowrap;
                 }
-                .status {
-                  font-weight: 800;
-                  padding: 0px 3px;
-                  color: #d12426;
+
+                div {
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);
+                  white-space: nowrap;
+                  gap: 3px 5px;
+
+                  .status {
+                    font-weight: 800;
+                    padding: 0px 3px;
+                    color: #d12426;
+                  }
                 }
-                p:nth-child(6) {
+                .dossiers {
                   margin-top: 6px;
-                  font-weight: 500;
+                  h2 {
+                    grid-column-start: 1;
+                    grid-column-end: 4;
+                    margin-bottom: 0px;
+                  }
+                  /* font-weight: 500; */
                 }
               }
 
@@ -1466,7 +1496,8 @@
                   <td>${product.productDescription}</td>
                   <td>
                     <div class="documents">
-                      <h2>Product Permission Domestic & Export</h2>
+                    <h2>Product Permission Domestic & Export</h2>
+                    <div>
                       <p>COPP: <span class="status">${
                         product?.documents?.COPP ? "✓" : "-"
                       }</span></p>
@@ -1479,14 +1510,17 @@
                       <p>MSDS: <span class="status">${
                         product?.documents?.MSDS ? "✓" : "-"
                       }</span></p>
-                      <p>Dossier</p>
+                    </div>
+                    <div class="dossiers">
+                      <h2>Dossier</h2>
                       <p>CTD: <span class="status">${
                         product?.documents?.CTD ? "✓" : "-"
                       }</span></p>
                       <p>ACTD: <span class="status">${
                         product?.documents?.ACTD ? "✓" : "-"
                       }</span></p>
-                    </div>               
+                    </div>
+                  </div>         
                   </td>
                   <td>${product.primaryPacking}</td>
                   <td><button data-image="${
@@ -1826,25 +1860,29 @@
                 <td>
                   <div class="documents">
                     <h2>Product Permission Domestic & Export</h2>
-                    <p>COPP: <span class="status">${
-                      product?.documents?.COPP ? "✓" : "-"
-                    }</span></p>
-                    <p>FSC: <span class="status">${
-                      product?.documents?.FSC ? "✓" : "-"
-                    }</span></p>
-                    <p>COA: <span class="status">${
-                      product?.documents?.COA ? "✓" : "-"
-                    }</span></p>
-                    <p>MSDS: <span class="status">${
-                      product?.documents?.MSDS ? "✓" : "-"
-                    }</span></p>
-                    <p>Dossier</p>
-                    <p>CTD: <span class="status">${
-                      product?.documents?.CTD ? "✓" : "-"
-                    }</span></p>
-                    <p>ACTD: <span class="status">${
-                      product?.documents?.ACTD ? "✓" : "-"
-                    }</span></p>
+                    <div>
+                      <p>COPP: <span class="status">${
+                        product?.documents?.COPP ? "✓" : "-"
+                      }</span></p>
+                      <p>FSC: <span class="status">${
+                        product?.documents?.FSC ? "✓" : "-"
+                      }</span></p>
+                      <p>COA: <span class="status">${
+                        product?.documents?.COA ? "✓" : "-"
+                      }</span></p>
+                      <p>MSDS: <span class="status">${
+                        product?.documents?.MSDS ? "✓" : "-"
+                      }</span></p>
+                    </div>
+                    <div class="dossiers">
+                      <h2>Dossier</h2>
+                      <p>CTD: <span class="status">${
+                        product?.documents?.CTD ? "✓" : "-"
+                      }</span></p>
+                      <p>ACTD: <span class="status">${
+                        product?.documents?.ACTD ? "✓" : "-"
+                      }</span></p>
+                    </div>
                   </div>               
                 </td>
                 <td>${product.primaryPacking}</td>
